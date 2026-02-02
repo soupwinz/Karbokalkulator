@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="no">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Karbokalkulator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header class="card">
+    <h1>Karbokalkulator</h1>
+    <p>Rask utregning av karbohydrater. Resultat avrundes til heltall.</p>
+    <div id="globalFeedback" class="feedback" aria-live="polite"></div>
+  </header>
+
+  <!-- 1) Hurtigkalkulator -->
+  <section class="card">
+    <div class="top">
+      <h2>Hurtigkalkulator</h2>
+      <div class="mini muted" id="quickResultMini"></div>
+    </div>
+
+    <div class="grid2">
+      <label class="field">
+        <span>Karbo per 100 g</span>
+        <input id="quickPer100" type="number" inputmode="decimal" step="0.1" placeholder="f.eks. 12.3" />
+      </label>
+
+      <label class="field">
+        <span>Vekt (gram)</span>
+        <input id="quickGrams" type="number" inputmode="decimal" step="1" placeholder="f.eks. 85" />
+      </label>
+    </div>
+
+    <div class="resultRow">
+      <div class="resultBig">Karbo: <span id="quickResult">0</span> g</div>
+      <div class="btnRow">
+        <button id="quickAddMeal" type="button">Legg til i måltid</button>
+        <button id="quickReset" class="secondary" type="button">Nullstill</button>
+      </div>
+    </div>
+
+    <!-- FAST infoboks (rediger i koden) -->
+    <div class="infoBox">
+      <strong>Info</strong>
+      <div class="muted mini">
+        Tips: Bruk “Karbohydrater” fra pakke/etikett (per 100 g), skriv inn vekt i gram, og få karbo i gram.
+      </div>
+    </div>
+  </section>
+
+  <!-- 2) Mine varer -->
+  <section class="card">
+    <div class="top">
+      <h2>Mine varer</h2>
+      <div class="mini muted" id="itemsCount"></div>
+    </div>
+
+    <div class="chips" id="itemsChips"></div>
+
+    <div class="cardSub" id="itemPanel" hidden>
+      <div class="top">
+        <h3 id="activeItemName">Vare</h3>
+        <div class="mini muted" id="activeItemMeta"></div>
+      </div>
+
+      <div class="grid2">
+        <label class="field">
+          <span>Karbo per 100 g</span>
+          <input id="itemPer100" type="number" inputmode="decimal" step="0.1" />
+        </label>
+
+        <label class="field">
+          <span>Vekt (gram)</span>
+          <input id="itemGrams" type="number" inputmode="decimal" step="1" placeholder="Skriv gram…" />
+        </label>
+      </div>
+
+      <div class="resultRow">
+        <div class="resultBig">Karbo: <span id="itemResult">0</span> g</div>
+        <div class="btnRow">
+          <button id="itemAddMeal" type="button">Legg til i måltid</button>
+          <button id="itemClearGrams" class="secondary" type="button">Tøm gram</button>
+        </div>
+      </div>
+
+      <div class="mini muted">
+        Standardvarer kan endres i koden. Egne varer kan redigeres her og slettes med X i listen.
+      </div>
+    </div>
+
+    <!-- FAST infoboks (rediger i koden) -->
+    <div class="infoBox">
+      <strong>Info</strong>
+      <div class="muted mini">
+        Verdier er veiledende. Standardvarer oppdateres når nettsiden oppdateres. Egne varer lagres lokalt på hver enhet.
+      </div>
+    </div>
+  </section>
+
+  <!-- 3) Måltid (flyttet opp) -->
+  <section class="card">
+    <div class="top">
+      <h2>Måltid</h2>
+      <div class="mini"><strong>Totalt:</strong> <span id="mealTotal">0</span> g</div>
+    </div>
+
+    <div id="mealList" class="mealList emptyState">Ingen varer i måltid ennå.</div>
+
+    <div class="btnRow">
+      <button id="clearMeal" class="secondary" type="button">Tøm måltid</button>
+    </div>
+
+    <p class="mini muted">Måltid starter tomt hver gang du åpner siden.</p>
+  </section>
+
+  <!-- 4) Legg til egen matvare (nederst) -->
+  <section class="card">
+    <div class="top">
+      <h2>Legg til egen matvare</h2>
+    </div>
+
+    <div class="grid2">
+      <label class="field">
+        <span>Navn</span>
+        <input id="newName" type="text" placeholder="f.eks. Yoghurt" />
+      </label>
+
+      <label class="field">
+        <span>Karbo per 100 g</span>
+        <input id="newPer100" type="number" inputmode="decimal" step="0.1" placeholder="f.eks. 4.5" />
+      </label>
+    </div>
+
+    <div class="btnRow">
+      <button id="addItem" type="button">Lagre vare</button>
+      <button id="resetCustom" class="secondary" type="button">Fjern alle egne varer</button>
+    </div>
+
+    <p class="mini muted">Egne varer lagres lokalt på denne enheten. Du kan slette en vare med X i listen.</p>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
